@@ -1,0 +1,73 @@
+// Place all the styles related to the Tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// all color of task
+.first-color{
+	background-color: #02bcf5;
+}
+.second-color{
+	background-color: #0073e6;
+}
+.third-color{
+	background-color: #003ab9;
+}
+.fourth-color{
+	background-color: #002c59;
+}
+.fifth-color{
+	background-color: #09cbcb;
+}
+
+
+//task show page css
+.task-delete-link{
+	border-bottom: 1px solid white;
+}
+.task-delete-link:hover{
+	border-bottom: none;
+}
+
+.task-edit-link{
+	border-bottom: 1px solid white;
+}
+.task-edit-link:hover{
+	border-bottom: none;
+}
+.active{
+	color: #02bcf5;
+}
+
+.task-checkbox{
+	padding: 3px;
+	border: 1px solid white;
+}
+.show-task{
+	position: relative;
+	height: 150px;
+	width: 87%;
+}
+.task-done-msg{
+	width: 100%;
+	vertical-align: middle;
+	top: 50%;
+	left: 50%;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	font-size: 20px;
+	line-height: 28px;
+	position: absolute;
+}
+.task-op{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	padding-bottom: 10px;
+}
+.task-detail{
+	overflow:hidden;
+	display:inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 90%; 
+}
