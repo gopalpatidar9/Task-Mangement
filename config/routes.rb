@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   get 'update_task_status', to: 'tasks#update_task_status'
   get 'filter_task_day', to: 'tasks#filter_task_day'
-
   get 'task_activity', to: 'task_activity#index', as: 'task_activity'
 
   get 'task_update', to: 'tasks#task_update'

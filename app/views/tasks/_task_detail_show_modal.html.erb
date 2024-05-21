@@ -5,6 +5,11 @@
 			<h5 class="modal-title h3" id="staticBackdropLabel">Task</h5>
 			<span data-bs-dismiss="modal" class="h3 cursor-pointer" aria-label="Close"><%= fa_icon 'times 1x' %></span>
 		</div>
+		<% if @task.task_status %>
+		   <p class="text-right text-success mr-2">⌛ <%= @task.task_day %></p>
+		<% else %>
+		   <p class="text-right text-danger mr-2">⏳ <%= @task.task_day %></p>
+		<% end %>
 		<div class="container">
 			<div class="mt-4">
 				<p class="h4"><%= @task.task_name %></p>

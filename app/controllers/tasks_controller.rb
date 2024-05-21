@@ -4,10 +4,13 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    date = (Date.today).to_s
+    date = (Date.today)
     @tasks = current_user.tasks.where(task_day: date)
+    tomorrow = Date.today+1
+    @tasks_day_after_tomorrow = current_user.tasks.where('task_day > ?' , tomorrow)
   end
 
+  
   # GET /tasks/1 or /tasks/1.json
   def show
   end
@@ -23,14 +26,14 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     # respond_to do |format|
-    #   format.js { render  "tasks/edit" }
+    #   format.js { render  "tasks/edit" }  
     # end
   end
 
   # POST /tasks or /tasks.json
   def create
-    get_day = check_task_day(params[:task_day])
-    @task = current_user.tasks.new(task_name: params[:task_name], task_description: params[:task_description], task_priority: params[:task_priority],task_color: params[:task_color], task_day: get_day )
+    # get_day = check_task_day(params[:task_day])
+    @task = current_user.tasks.new(task_name: params[:task_name], task_description: params[:task_description], task_priority: params[:task_priority],task_color: params[:task_color], task_day: params[:task_day] )
     if @task.save
       respond_to do |format|
         # format.js { render 'tasks/create' }
@@ -41,10 +44,10 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    get_day = check_task_day(params[:task][:task_day])
+    # get_day = check_task_day(params[:task][:task_day])
     respond_to do |format|
-      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: get_day, task_color: params[:task_color] )
-        @tasks = current_user.tasks.where(task_day: get_day)
+      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: params[:task_day], task_color: params[:task_color] )
+        # @tasks = current_user.tasks.where(task_day: get_day)
         format.js { render 'tasks/task_update' }
       else
         redirect_to root_path
@@ -62,17 +65,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def check_task_day(day)
-    if day == "Day After Tomorrow"
-      date = Date.today
-      return (date+2).to_s
-    elsif day == "Tomorrow"
-      date = Date.today
-      return (date+1).to_s
-    else
-      return (Date.today).to_s
-    end
-  end
+  # def check_task_day(day)
+  #   if day == "Day After Tomorrow"
+  #     date = Date.today
+  #     return (date+2).to_s
+  #   elsif day == "Tomorrow"
+  #     date = Date.today
+  #     return (date+1).to_s
+  #   else
+  #     return (Date.today).to_s
+  #   end
+  # end
   
   def update_task_status
     task = Task.find(params[:task_id])
@@ -92,7 +95,13 @@ class TasksController < ApplicationController
   
   def filter_task_day
     get_filter_day = params[:filter_day]
-    @tasks = current_user.tasks.where(task_day: get_filter_day)
+    if get_filter_day == 'after_tomorrow'
+      tomorrow = Date.today + 1
+      @tasks = current_user.tasks.where('task_day > ?', tomorrow)
+    else
+      @tasks = current_user.tasks.where(task_day: get_filter_day)
+    end
+
     respond_to do |format|
       format.js { render 'tasks/task_filter_by_day' }
     end
@@ -124,3 +133,5 @@ class TasksController < ApplicationController
       params.require(:task).permit(:task_name, :task_description, :task_priority, :task_day, :task_color)
     end
 end
+
+

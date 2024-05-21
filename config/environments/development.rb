@@ -34,7 +34,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -60,6 +60,18 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+  
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'taskii.com', # Replace with your domain or leave as is
+    user_name:            ENV['GMAIL_USERNAME'], # Use environment variables for security
+    password:             ENV['GMAIL_PASSWORD'], # Use environment variables for security
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

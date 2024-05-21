@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 2021_06_13_155851) do
   create_table "tasks", force: :cascade do |t|
     t.string "task_name", null: false
     t.string "task_description"
-    t.integer "task_priority"
+    t.string "task_priority"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.boolean "task_status"
     t.string "task_color"
-    t.string "task_day", default: "2024-03-12"
+    t.date "task_day"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 

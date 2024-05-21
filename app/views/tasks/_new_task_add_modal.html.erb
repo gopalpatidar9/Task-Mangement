@@ -12,11 +12,13 @@
               </div>
               <div class="mt-4">
                 <div class="row">
-                  <div class="col-sm-6"> 
-                    <%= f.text_field :task_priority, placeholder: "Enter task priority", class: 'form-control' %>
+                  <div class="col-sm-6">
+                    <%= f.label :task_priority %> 
+                    <%= f.select(:task_priority, ["Low", "High", "Medium"], { selected: "Low" }, {required: 'true', class: 'form-control'})  %>
                   </div>
                   <div class="col-sm-6"> 
-                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: "Today" }, {required: 'true', class: 'form-control'})  %>
+                    <%= f.label :task_day %> 
+                    <%= f.date_field :task_day , class: 'form-control'  %>
                   </div>
                 </div>
               </div>

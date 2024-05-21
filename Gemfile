@@ -20,6 +20,10 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'whenever', require: false
+# Gemfile
+gem 'dotenv-rails', groups: [:development, :test]
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -32,6 +36,7 @@ gem 'chartkick'
 
 gem 'groupdate'
 gem 'bootstrap', '~> 4.0.0'
+gem 'sidekiq-scheduler'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -66,3 +71,6 @@ group :production do
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+

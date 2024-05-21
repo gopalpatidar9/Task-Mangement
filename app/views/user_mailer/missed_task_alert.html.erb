@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Missed Task Alert</h1>
+    <p>Dear <%= @user.name %>,</p>
+    <p>You have missed the following task:</p>
+    <p><strong>Task Name:</strong> <%= @task.task_name %></p>
+    <p><strong>Description:</strong> <%= @task.task_description %></p>
+    <p>Please make sure to complete your tasks on time.</p>
+    <p>Best regards,</p>
+    <p>Your Task Manager App</p>
+  </body>
+</html>
