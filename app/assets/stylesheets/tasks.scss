@@ -43,8 +43,11 @@
 }
 .show-task{
 	position: relative;
-	height: 150px;
+	height: 180px;
 	width: 87%;
+}
+.priorty {
+	float: right;
 }
 .task-done-msg{
 	width: 100%;

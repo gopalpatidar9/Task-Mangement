@@ -23,6 +23,9 @@
 				<% else %>
 					<div class="alert alert-danger h5" role="alert">
 						This task is not done 🙁 !
+						<% if @task.task_day < Date.today %>
+						<br/><br>You missed this task ⛔ 🤬 !
+						<% end %>
 					</div>
 				<% end %>
 			</div>

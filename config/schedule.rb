@@ -1,5 +1,7 @@
+set :output, { error: 'log/cron_error.log', standard: 'log/cron.log' }
+set :environment, "development"
 
-every 1.day, at: '12:00 am' do
+every 1.day, at: '9:50 am' do
     runner "TaskNotificationJob.perform_now"
 end
 

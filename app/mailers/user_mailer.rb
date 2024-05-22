@@ -1,10 +1,10 @@
 class UserMailer < ApplicationMailer
     default from: 'gopalpatidara9@gmail.com'
 
-    def missed_task_alert(user, task)
-      @user = user
-      @task = task
-      mail(to: @user.email, subject: 'Missed Task Alert')
+    def task_due_tomorrow_notification_email(user, task)
+        @user = user
+        @task = task
+        mail(to: @user.email, subject: "Your Task is Due Tomorrow")
     end
 
     def test_email(user)
@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
     def task_due_date_notification_email(task)
         @task = task
         @user = task.user # Assuming Task belongs to User
-        mail(to: @user.email, subject: 'Task Due Date Notification')
+        mail(to: @user.email, subject: 'Your Task is Overdue')
     end
 end
 
