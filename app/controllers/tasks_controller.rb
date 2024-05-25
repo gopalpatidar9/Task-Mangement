@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   def update
     # get_day = check_task_day(params[:task][:task_day])
     respond_to do |format|
-      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: params[:task_day], task_color: params[:task_color] )
+      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: params[:task][:task_day], task_color: params[:task_color] )
         # @tasks = current_user.tasks.where(task_day: get_day)
         format.js { render 'tasks/task_update' }
       else
@@ -79,20 +79,23 @@ class TasksController < ApplicationController
   
   def update_task_status
     task = Task.find(params[:task_id])
-    if params[:task_status].eql?('1')
-      task.task_status = true
-    else
-      task.task_status = false  
-    end
+    task.task_status = params[:task_status].eql?('1')
     task.save
-    date = (Date.today).to_s
-    @tasks = current_user.tasks.where(task_day: date)
+    date = task.task_day
+    if date == Date.today
+      @tasks = current_user.tasks.where(task_day: date)   
+    elsif date == Date.today + 1
+      @tasks = current_user.tasks.where(task_day: date)
+    elsif date == Date.today - 1
+      @tasks = current_user.tasks.where(task_day: date )
+    else
+      @tasks = current_user.tasks.where('task_day > ?', Date.today + 1)
+    end
     respond_to do |format|
-      # format.html {}
-      format.js { render 'tasks/update_task_status' }
+      format.js { render partial: 'tasks/show_tasks', locals: { tasks: @tasks } }
     end
   end
-  
+      
   def filter_task_day
     get_filter_day = params[:filter_day]
     if get_filter_day == 'after_tomorrow'

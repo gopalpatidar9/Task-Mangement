@@ -1,1 +1,1 @@
-document.querySelector('#show-tasks').innerHTML = '<%= j render partial: 'tasks/show_tasks.html.erb' %>'
+document.querySelector('#show-tasks').innerHTML = '<%= j render partial: 'tasks/show_tasks', locals: { tasks: @tasks } %>';

@@ -16,7 +16,9 @@
   <div id="">
     <div class="row task-width">
       <div class="col-10" id="show-tasks">
-        <%= render "tasks/show_tasks" %>
+        <div id="show-tasks">
+         <%= render partial: 'tasks/show_tasks', locals: { tasks: @tasks } %>
+        </div>
       </div>  
       <div class="col-2 mt-4 text-center p-4 d-none d-lg-block h-100 shadow rounded text-right" id="day-filter">
         <% day = Date.today %>
@@ -25,8 +27,8 @@
         <div class="mt-3 pt-3 border-top"><%= link_to "Tomorrow", filter_task_day_path(filter_day: (day+1)), remote: true, class:'h4 text-secondary filter-day', onclick: "change_color(this)" %></div>
         <div class="mt-3 pt-3 border-top"> <%= link_to "Day After Tomorrow", filter_task_day_path(filter_day: 'after_tomorrow'), remote: true, class: 'h4 text-secondary filter-day', onclick: "change_color(this)" %></div>
       </div>
-    </div> 
-    
+  </div> 
+
     
     <div id="show-edit-tasks">
     </div>
@@ -44,3 +46,4 @@
     document.getElementById('select-c').value = get_color;
   }
 </script>
+

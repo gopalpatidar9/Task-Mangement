@@ -23,10 +23,14 @@
               <div class="mt-4">
                 <div class="row">
                   <div class="col-sm-6"> 
-                    <%= f.text_field :task_priority, class: 'form-control' %>
+                    <%= f.label :task_priority %> 
+                    <p class="form-control">
+                    <%= f.select(:task_priority, ["Low", "High", "Medium"], class: 'form-control')  %>
+                    </p>
                   </div>
                   <div class="col-sm-6"> 
-                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: show_edit_task_day(@task.task_day) }, {required: 'true', class: 'form-control'})  %>
+                    <%= f.label :task_day %> 
+                    <%= f.date_field :task_day , class: 'form-control'  %>
                   </div>
                 </div>
               </div>
@@ -34,10 +38,10 @@
               <div class="container">
                 <label for="">Select color for task</label>
                 <div class="row " id=show-color"">
-                  <div class="col-1 mr-2 bg-primary rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this ,'bg-primary text-white')"></div>
-                  <div class="col-1 mr-2 bg-warning rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this, 'bg-warning text-white')"></div>
+                 <div class="col-1 mr-2 bg-primary rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this ,'bg-primary text-white')"></div>
+                  <div class="col-1 mr-2 bg-success rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this, 'bg-success text-white')"></div>
                   <div class="col-1 mr-2 bg-info rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-info text-white')"></div>
-                  <div class="col-1 mr-2 bg-danger rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-danger text-white')"></div>
+                  <div class="col-1 mr-2 fifth-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'fifth-color text-white')"></div>
 
                   <div class="col-1 mr-2 first-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'first-color text-white')"></div>
                   <div class="col-1 mr-2 fourth-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'fourth-color text-white')"></div>

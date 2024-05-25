@@ -1,0 +1,267 @@
+
+<style>
+.scroll-section {
+  max-height: 200px;
+  overflow-y: auto;
+  
+}
+</style>
+<div class="container">
+	<!--render sub navigation bar -->
+  <%= render 'tasks/sub_nav' %>
+
+	
+<div class="container">
+    <div class="main-body">
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4><%= current_user.name %></h4>
+                      <button class="btn btn-outline-primary">Add Photo</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">🕵️ &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Your Tasks Status  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  🕵️ </h6>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">📝 Total Task</h6>
+                    <span class="text-secondary"><%= @tasks.count%></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">📑 Completed Task</h6>
+                    <span class="text-secondary"><%= task_completed %></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">📝 Uncomplited Task</h6>
+                    <span class="text-secondary"><%= task_uncomplete %></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                    <span class="text-secondary">bootdey</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <%= current_user.name %>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <%= current_user.email %>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-info " target="__blank" href="">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="card mb-3">
+                <div class="card-body">
+                  <ul class="nav nav-tabs mb-3 mt-2" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="ex1-tab-4" data-mdb-toggle="tab" href="#ex1-tabs-4" role="tab"  aria-controls="ex1-tabs-4"  aria-selected="true">All</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="ex1-tab-5" data-mdb-toggle="tab" href="#ex1-tabs-5" role="tab" aria-controls="ex1-tabs-5" aria-selected="false">High</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="ex1-tab-6" data-mdb-toggle="tab" href="#ex1-tabs-6" role="tab" aria-controls="ex1-tabs-6" aria-selected="false">Politics</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="ex1-tab-7" data-mdb-toggle="tab" href="#ex1-tabs-7" role="tab" aria-controls="ex1-tabs-7" aria-selected="false">Technology</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="ex1-tab-8" data-mdb-toggle="tab" href="#ex1-tabs-8" role="tab" aria-controls="ex1-tabs-8" aria-selected="false">Governments</a>
+                    </li>
+                    
+                  </ul>
+                  <section style="background-color:;">
+                    <div class="py-5">
+                      <div class="row ml-1">
+                        <div class="">
+                        <div class=" mr-4" style="border:;"></div>
+                        <div class="tab-content border-0" id="ex1-content" style="margin-top:-29px;">
+                          <div class="tab-pane fade show active" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                            <%= render partial: 'tasks/show_tasks', locals: { tasks: @tasks } %>
+                          </div>
+                          <div class="tab-pane fade" id="ex1-tabs-5" role="tabpanel" aria-labelledby="ex1-tab-5">
+                            <% if @high_priorty_tasks.empty? %>
+                             <span class="text-secondary h4">There are no tasks</span>
+                            <% else %>
+                              <div>
+                                <div class="">
+                                  <div class="h3 text-danger">Uncompleted Tasks</div>
+                                  <div class="row" >
+                                    <% @high_priorty_tasks.each do |task| %>
+                                      <% unless task.task_status? %>
+                                        <div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
+                                          <div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
+                                            <% if task.task_priority == 'High' %>
+                                              <b class="priorty text-danger"><%= task.task_priority %></b>
+                                            <% elsif task.task_priority == 'Medium' %>
+                                              <b class="priorty text-warning"><%= task.task_priority %></b>  
+                                            <% else %>
+                                              <b class="priorty text-dark m-1"><%= task.task_priority %></b>   
+                                            <% end %>  
+                                            <span class="task-detail h3 "><%= task.task_name %></span>
+                                            <p class="task-detail"><%= task.task_description %></p>
+                                          </div>
+                                          <div class="row border-top pt-2 d-flex task-op">
+                                            <div class="col-3" style="max-width: 30%;">
+                                              <%= link_to "Delete", task_path(task), method: :delete, remote: true, class:'text-white task-delete-link' %>
+                                            </div>
+                                            <div class="col-3">
+                                              <%= link_to "Edit", task_update_path(id: task.id), remote: true, class:'text-white task-edit-link' %>
+                                            </div>
+                                            <div class="" style="">
+                                              <input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" >
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+                                </div>
+                                <div class="">
+                                  <hr>
+                                  <div class="h3 text-primary">Completed Task</div>
+                                  <div class="row">
+                                    <% @high_priorty_tasks.each do |task| %>
+                                      <% if task.task_status? %>
+                                        <div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
+                                          <div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
+                                            <% if task.task_priority == 'High' %>
+                                              <b class="priorty text-danger"><%= task.task_priority %></b>
+                                            <% elsif task.task_priority == 'Medium' %>
+                                              <b class="priorty text-warning"><%= task.task_priority %></b>  
+                                            <% else %>
+                                              <b class="priorty text-info m-1"><%= task.task_priority %></b>   
+                                            <% end %>  
+                                            <span class="task-detail h3"><%= task.task_name %></span>
+                                            <p class="task-detail"><%= task.task_description %></p>
+                                          </div>
+                                          <div class="row border-top pt-2 d-flex task-op">
+                                            <div class="col-3">
+                                              <%= link_to "Delete", task_path(task), method: :delete, remote: true, class:'text-white task-delete-link' %>
+                                            </div>
+                                            <div class="col-3">
+                                              <%= link_to "Edit", task_update_path(id: task.id), remote: true, class:'text-white task-edit-link' %>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                              <input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" checked>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              </div>
+                            <% end %>
+                            </div>
+                          <div class="tab-pane fade" id="ex1-tabs-6" role="tabpanel" aria-labelledby="ex1-tab-6">
+                            hiiii
+                          </div>
+                          <div class="tab-pane fade" id="ex1-tabs-7" role="tabpanel" aria-labelledby="ex1-tab-7">
+                            hello
+                          </div>
+                          <div class="tab-pane fade" id="ex1-tabs-8" role="tabpanel" aria-labelledby="ex1-tab-8">
+                            
+                          </div>
+                          <div class="tab-pane fade" id="ex1-tabs-9" role="tabpanel" aria-labelledby="ex1-tab-9">
+                              
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>  
+                  </section>
+                  <hr>
+                </div>
+              </div> 
+
+            </div>      
+          </div>
+    </div>               
+</div>
+
+
+<% if notice.present?%>
+<div class="alert alert-success alert-dismissible fade show w-50 p-3 mx-auto" role="alert">
+  <%= notice %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% end %>
+<%= javascript_pack_tag "show_task" %>
+<%= javascript_pack_tag "task_status_update" %>
+
+
+  
+   <div id="show-edit-tasks">
+   </div>
+  <div id="show-task-details">
+    </div> 
+  </div>
+  <!-- Task add Modal -->
+  <%= render partial: 'tasks/new_task_add_modal' %>
+  
+</div>
+<script>
+  var get_all_color = document.getElementById('show-color');
+  setCheckColor = (e, get_color) =>{
+    e.classList.toggle('bg-dark')
+    document.getElementById('select-c').value = get_color;
+  }
+</script>    
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"
+></script>
+
+<script>
+    var myCustomScrollbar = document.querySelector('.my-custom-scrollbar');
+var ps = new PerfectScrollbar(myCustomScrollbar);
+
+var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
+
+myCustomScrollbar.onscroll = function () {
+  scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+}
+</script>

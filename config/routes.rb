@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'task_activity', to: 'task_activity#index', as: 'task_activity'
 
   get 'task_update', to: 'tasks#task_update'
+  get 'profile', to: 'home#profile'
 
   get 'show_task_details', to: 'tasks#show_task_details'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+

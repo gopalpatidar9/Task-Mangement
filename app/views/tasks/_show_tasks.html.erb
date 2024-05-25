@@ -1,73 +1,73 @@
 <% if @tasks.empty? %>
-	<span class="text-secondary h4">There no task</span>
+  <span class="text-secondary h4">There are no tasks</span>
 <% else %>
-	<div>
-		<div class="">
-			<div class="h3 text-danger">Uncompleted Tasks</div>
-			<div class="row">
-				<% @tasks.each do |task| %>
-					<% if !task.task_status? %>
-						<div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
-							<div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
-							   <% if task.task_priority == 'High' %>
-							    <b class="priorty text-danger"><%= task.task_priority %></b>
-							   <% elsif task.task_priority == 'Medium' %>
-							    <b class="priorty text-warning"><%= task.task_priority %></b>	
-							   <% else %>
-							    <b class="priorty text-info m-1"><%= task.task_priority %></b>	 	
-							   <% end %>	
-								<span class="task-detail h3 "><%= task.task_name %></span>
-								<p class="task-detail"><%= task.task_description %></p>
-							</div>
-							<div class="row border-top pt-2 d-flex task-op">
-								<div class="col-3">
-									<%= link_to "Delete", task_path(task), method: :delete,remote: true, class:'text-white task-delete-link' %>
-								</div>
-								<div class="col-3">
-									<%= link_to "Edit", task_update_path(id: task.id),remote: true ,class:'text-white task-edit-link' %>
-								</div>
-								<div class="col-6 text-right">
-									<input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" >
-								</div>
-							</div>
-						</div>
-					<% end %>
-				<% end %>
-			</div>
-		</div>
-		<div class="">
-			<hr>
-			<div class="h3 text-primary">Completed Task</div>
-			<div class="row">
-				<% @tasks.each do |task| %>
-					<% if task.task_status? %>
-						<div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
-							<div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
-							    <% if task.task_priority == 'High' %>
-							      <b class="priorty text-danger"><%= task.task_priority %></b>
-							    <% elsif task.task_priority == 'Medium' %>
-							      <b class="priorty text-warning"><%= task.task_priority %></b>	
-							    <% else %>
-							      <b class="priorty text-info m-1"><%= task.task_priority %></b>	 	
-							    <% end %>	
-								<span class="task-detail h3"><%= task.task_name %></span>
-								<p class="task-detail"><%= task.task_description %></p>
-							</div>
-							<div class="row border-top pt-2 d-flex task-op">
-								<div class="col-3">
-									<%= link_to "Delete", task_path(task), method: :delete,remote: true, class:'text-white task-delete-link' %>
-								</div>
-								<div class="col-3">
-									<%= link_to "Edit", task_update_path(id: task.id),remote: true ,class:'text-white task-edit-link' %>
-								</div>
-								<div class="col-6 text-right">
-									<input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" checked>
-								</div>
-							</div>
-						</div>
-					<% end %>
-				<% end %>
-			</div>
-		</div>
-	</div>
+  <div>
+    <div class="">
+      <div class="h3 text-danger">Uncompleted Tasks</div>
+      <div class="row">
+        <% @tasks.each do |task| %>
+          <% unless task.task_status? %>
+            <div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
+              <div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
+                <% if task.task_priority == 'High' %>
+                  <b class="priorty text-danger"><%= task.task_priority %></b>
+                <% elsif task.task_priority == 'Medium' %>
+                  <b class="priorty text-warning"><%= task.task_priority %></b>  
+                <% else %>
+                  <b class="priorty text-dark m-1"><%= task.task_priority %></b>   
+                <% end %>  
+                <span class="task-detail h3 "><%= task.task_name %></span>
+                <p class="task-detail"><%= task.task_description %></p>
+              </div>
+              <div class="row border-top pt-2 d-flex task-op">
+                <div class="col-3">
+                  <%= link_to "Delete", task_path(task), method: :delete, remote: true, class:'text-white task-delete-link' %>
+                </div>
+                <div class="col-3">
+                  <%= link_to "Edit", task_update_path(id: task.id), remote: true, class:'text-white task-edit-link' %>
+                </div>
+                <div class="col-6 text-right">
+                  <input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" >
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="">
+      <hr>
+      <div class="h3 text-primary">Completed Task</div>
+      <div class="row">
+        <% @tasks.each do |task| %>
+          <% if task.task_status? %>
+            <div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
+              <div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
+                <% if task.task_priority == 'High' %>
+                  <b class="priorty text-danger"><%= task.task_priority %></b>
+                <% elsif task.task_priority == 'Medium' %>
+                  <b class="priorty text-warning"><%= task.task_priority %></b>  
+                <% else %>
+                  <b class="priorty text-info m-1"><%= task.task_priority %></b>   
+                <% end %>  
+                <span class="task-detail h3"><%= task.task_name %></span>
+                <p class="task-detail"><%= task.task_description %></p>
+              </div>
+              <div class="row border-top pt-2 d-flex task-op">
+                <div class="col-3">
+                  <%= link_to "Delete", task_path(task), method: :delete, remote: true, class:'text-white task-delete-link' %>
+                </div>
+                <div class="col-3">
+                  <%= link_to "Edit", task_update_path(id: task.id), remote: true, class:'text-white task-edit-link' %>
+                </div>
+                <div class="col-6 text-right">
+                  <input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" checked>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
