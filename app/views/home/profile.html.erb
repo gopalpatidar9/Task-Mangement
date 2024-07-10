@@ -176,15 +176,13 @@
                                             <p class="task-detail"><%= task.task_description %></p>
                                           </div>
                                           <div class="row border-top pt-2 d-flex task-op">
-                                            <div class="col-3">
+                                            <div class="col-3" style="max-width: 30%;">
                                               <%= link_to "Delete", task_path(task), method: :delete, remote: true, class:'text-white task-delete-link' %>
                                             </div>
                                             <div class="col-3">
                                               <%= link_to "Edit", task_update_path(id: task.id), remote: true, class:'text-white task-edit-link' %>
                                             </div>
-                                            <div class="col-6 text-right">
-                                              <input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" checked>
-                                            </div>
+                                              <input type="checkbox"  style="width: 17px;" name="task_status" id="<%= task.id %>" class="t_status" onchange="update_task_s(this)" checked>
                                           </div>
                                         </div>
                                       <% end %>
